@@ -1,12 +1,12 @@
 /*
-Create an Employee class with private instance variables for
+Employeeate an Employee class with private instance variables for
 employeeName (String) and employeeSalary (double). Implement
 public methods readEmployeeData() (to take input from the user) and
 displayEmployeeData() (to print the employee's name and salary).
 Demonstrate object creation and method invocation in a main method.
 */
 
-class Employee{
+class Employee_data{
 
     private String employeeName;
     private double employeeSalary;
@@ -18,19 +18,15 @@ class Employee{
         System.out.print("Enter employee salary: ");
         employeeSalary = scanner.nextDouble();
     }
-
     public void displayEmployeeData(){
         System.out.println("Employee Name: " + employeeName);
         System.out.println("Employee Salary: " + employeeSalary);
     }
+}
+public class Employee{
     public static void main(String[] args) {
-        Employee employee = new Employee();
+        Employee_data employee = new Employee_data();
         employee.readEmployeeData();
         employee.displayEmployeeData();
     }
-}
-public static void Employee(String[] args) {
-        Employee employee = new Employee();
-        employee.readEmployeeData();
-        employee.displayEmployeeData();
 }
