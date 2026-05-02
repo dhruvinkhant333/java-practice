@@ -1,103 +1,93 @@
-// Base class Vehicle
-class Vehicle {
-    // Protected access specifier for inherited members
-    protected String vehicleNumber;
-    protected String brand;
-    protected String fuelType;
+/**
+ * Question 5.4.6: Abstract Class Vehicle
+ * Program to demonstrate abstract classes and methods
+ * with Car and Bike subclasses
+ */
+
+// Abstract class Vehicle
+abstract class Vehicle {
+    protected String name;
     
-    // Constructor to initialize Vehicle attributes
-    public Vehicle(String vehicleNumber, String brand, String fuelType) {
-        this.vehicleNumber = vehicleNumber;
-        this.brand = brand;
-        this.fuelType = fuelType;
+    // Constructor
+    public Vehicle(String name) {
+        this.name = name;
     }
     
-    // Method to display vehicle details
-    public void displayDetails() {
-        System.out.println("=== Vehicle Details ===");
-        System.out.println("Vehicle Number: " + vehicleNumber);
-        System.out.println("Brand: " + brand);
-        System.out.println("Fuel Type: " + fuelType);
+    // Abstract method for fuel type
+    abstract String fuelType();
+    
+    // Abstract method for number of wheels
+    abstract int noOfWheels();
+    
+    // Concrete method to display vehicle information
+    public void displayInfo() {
+        System.out.println("Vehicle: " + name);
+        System.out.println("Fuel Type: " + fuelType());
+        System.out.println("Number of Wheels: " + noOfWheels());
+        System.out.println();
     }
 }
 
-// Subclass Car derived from Vehicle
+// Concrete subclass Car
 class Car extends Vehicle {
-    protected int numberOfSeats;
-    protected boolean ACavailable;
     
-    // Constructor with constructor chaining using super keyword
-    public Car(String vehicleNumber, String brand, String fuelType, int numberOfSeats, boolean ACavailable) {
-        super(vehicleNumber, brand, fuelType);  // Invoke parent class constructor
-        this.numberOfSeats = numberOfSeats;
-        this.ACavailable = ACavailable;
+    public Car(String name) {
+        super(name);
     }
     
-    // Override displayDetails() method
     @Override
-    public void displayDetails() {
-        super.displayDetails();  // Invoke parent class method using super keyword
-        System.out.println("Number of Seats: " + numberOfSeats);
-        System.out.println("AC Available: " + (ACavailable ? "Yes" : "No"));
+    String fuelType() {
+        return "Petrol/Diesel";
+    }
+    
+    @Override
+    int noOfWheels() {
+        return 4;
     }
 }
 
-// Subclass ElectricCar derived from Car
-class ElectricCar extends Car {
-    private double batteryCapacity;  // in kWh
-    private double chargingTime;     // in hours
+// Concrete subclass Bike
+class Bike extends Vehicle {
     
-    // Constructor with constructor chaining
-    public ElectricCar(String vehicleNumber, String brand, String fuelType, 
-                       int numberOfSeats, boolean ACavailable, 
-                       double batteryCapacity, double chargingTime) {
-        super(vehicleNumber, brand, fuelType, numberOfSeats, ACavailable);  // Invoke parent class constructor
-        this.batteryCapacity = batteryCapacity;
-        this.chargingTime = chargingTime;
+    public Bike(String name) {
+        super(name);
     }
     
-    // Override displayDetails() method
     @Override
-    public void displayDetails() {
-        super.displayDetails();  // Invoke parent class method
-        System.out.println("Battery Capacity: " + batteryCapacity + " kWh");
-        System.out.println("Charging Time: " + chargingTime + " hours");
+    String fuelType() {
+        return "Petrol";
+    }
+    
+    @Override
+    int noOfWheels() {
+        return 2;
     }
 }
 
 // Main class to demonstrate the program
 public class VehicleInheritance {
     public static void main(String[] args) {
-        System.out.println("========== VEHICLE INHERITANCE DEMONSTRATION ==========\n");
+        System.out.println("========== ABSTRACT CLASS - VEHICLE DEMONSTRATION ==========\n");
         
-        // Create objects of all three classes
-        Vehicle vehicle = new Vehicle("VEH001", "Toyota", "Petrol");
-        Car car = new Car("CAR001", "Honda", "Diesel", 5, true);
-        ElectricCar electricCar = new ElectricCar("ECAR001", "Tesla", "Electric", 5, true, 100.0, 8.5);
+        // Create objects of Car and Bike subclasses
+        Vehicle car = new Car("Toyota Fortuner");
+        Vehicle bike = new Bike("Hero Honda");
         
-        // Display details using overridden methods
-        System.out.println("1. Vehicle Object:");
-        vehicle.displayDetails();
-        System.out.println();
+        // Display information for Car
+        System.out.println("1. Car Information:");
+        car.displayInfo();
         
-        System.out.println("2. Car Object:");
-        car.displayDetails();
-        System.out.println();
+        // Display information for Bike
+        System.out.println("2. Bike Information:");
+        bike.displayInfo();
         
-        System.out.println("3. ElectricCar Object:");
-        electricCar.displayDetails();
-        System.out.println();
+        // Additional examples
+        System.out.println("3. Additional Examples:");
+        Vehicle car2 = new Car("Maruti Swift");
+        Vehicle bike2 = new Bike("Bajaj Pulsar");
         
-        // Demonstrate Upcasting (implicit conversion of subclass to parent class)
-        System.out.println("========== UPCASTING DEMONSTRATION ==========\n");
-        Vehicle v1 = new Car("CAR002", "Maruti", "Petrol", 4, false);
-        Vehicle v2 = new ElectricCar("ECAR002", "BMW", "Electric", 4, true, 85.0, 7.0);
-        
-        System.out.println("4. Upcasted Car Object:");
-        v1.displayDetails();
-        System.out.println();
-        
-        System.out.println("5. Upcasted ElectricCar Object:");
+        car2.displayInfo();
+        bike2.displayInfo();
         v2.displayDetails();
         System.out.println();
         
