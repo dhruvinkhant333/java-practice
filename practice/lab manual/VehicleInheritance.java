@@ -88,42 +88,40 @@ public class VehicleInheritance {
         
         car2.displayInfo();
         bike2.displayInfo();
-        v2.displayDetails();
-        System.out.println();
         
         // Demonstrate Downcasting with instanceof check
         System.out.println("========== DOWNCASTING WITH instanceof CHECK ==========\n");
         
-        // Downcast v1 (which actually holds a Car object)
-        if (v1 instanceof Car) {
-            Car downcastCar = (Car) v1;
-            System.out.println("6. Downcasted v1 to Car (verified with instanceof):");
-            System.out.println("   Number of Seats: " + downcastCar.numberOfSeats);
-            System.out.println("   AC Available: " + (downcastCar.ACavailable ? "Yes" : "No"));
+        // Downcast car (which actually holds a Car object)
+        if (car instanceof Car) {
+            Car downcastCar = (Car) car;
+            System.out.println("4. Downcasted car to Car (verified with instanceof):");
+            System.out.println("   Confirmed as Car object successfully");
         }
         System.out.println();
         
-        // Downcast v2 (which actually holds an ElectricCar object)
-        if (v2 instanceof ElectricCar) {
-            ElectricCar downcastElectricCar = (ElectricCar) v2;
-            System.out.println("7. Downcasted v2 to ElectricCar (verified with instanceof):");
-            System.out.println("   Battery Capacity: " + downcastElectricCar.batteryCapacity + " kWh");
-            System.out.println("   Charging Time: " + downcastElectricCar.chargingTime + " hours");
+        // Downcast bike (which actually holds a Bike object)
+        if (bike instanceof Bike) {
+            Bike downcastBike = (Bike) bike;
+            System.out.println("5. Downcasted bike to Bike (verified with instanceof):");
+            System.out.println("   Confirmed as Bike object successfully");
         }
         System.out.println();
         
         // instanceof checks to demonstrate runtime type checking
         System.out.println("========== RUNTIME TYPE CHECKING WITH instanceof ==========\n");
-        Vehicle[] vehicles = { vehicle, car, electricCar, v1, v2 };
+        Vehicle[] vehicles = { car, bike, car2, bike2 };
         
         for (int i = 0; i < vehicles.length; i++) {
-            System.out.println("Object " + (i + 1) + ":");
-            if (vehicles[i] instanceof ElectricCar) {
-                System.out.println("   Type: ElectricCar");
-            } else if (vehicles[i] instanceof Car) {
+            System.out.println("Object " + (i + 1) + ": " + vehicles[i].name);
+            if (vehicles[i] instanceof Car) {
                 System.out.println("   Type: Car");
-            } else if (vehicles[i] instanceof Vehicle) {
-                System.out.println("   Type: Vehicle");
+                System.out.println("   Wheels: " + vehicles[i].noOfWheels());
+                System.out.println("   Fuel: " + vehicles[i].fuelType());
+            } else if (vehicles[i] instanceof Bike) {
+                System.out.println("   Type: Bike");
+                System.out.println("   Wheels: " + vehicles[i].noOfWheels());
+                System.out.println("   Fuel: " + vehicles[i].fuelType());
             }
         }
         
