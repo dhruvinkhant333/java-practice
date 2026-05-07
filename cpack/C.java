@@ -3,35 +3,48 @@ package cpack;
 import apack.A;
 
 /**
- * Class C from cpack package
- * Demonstrates access specifiers through object creation and casting
- * Part of cpack package
+ * Class C demonstrates accessing members of A from a different package
+ * without inheritance
  */
 public class C {
     
     /**
-     * Display method that tries to access variables of class A
+     * Display method to show which variables can be accessed
+     * through object reference (without inheritance)
      */
     public void display() {
-        System.out.println("\n--- Class C from cpack ---");
-        System.out.println("Accessing variables of class A through object:\n");
+        System.out.println("\n========== CLASS C (no inheritance) ==========");
+        System.out.println("Accessing Class A members without inheritance:");
         
-        // Create an object of class A
-        A obj = new A(100, 200, 300);
+        // Create object of class A
+        A objA = new A(100, 200, 300);
         
-        // Public variable - ACCESSIBLE
-        System.out.println("✓ Public Variable: " + obj.pubVar);
+        try {
+            System.out.println("  ✓ Public Variable (pubVar): " + objA.pubVar);
+            System.out.println("    → Accessible because it's public");
+        } catch (Exception e) {
+            System.out.println("  ✗ Public Variable: Not accessible");
+        }
         
-        // Protected variable - NOT ACCESSIBLE (different package, not a subclass)
-        // System.out.println("✗ Protected Variable: " + obj.protVar);  // COMPILATION ERROR
-        System.out.println("✗ Protected Variable: [NOT ACCESSIBLE - different package, not a subclass]");
+        try {
+            // This will cause compilation error - cannot access protected variable
+            // from different package without inheritance
+            // System.out.println("  Protected Variable (protVar): " + objA.protVar);
+            System.out.println("  ✗ Protected Variable (protVar): NOT ACCESSIBLE");
+            System.out.println("    → Protected members are not accessible outside package");
+            System.out.println("       (except through inheritance)");
+        } catch (Exception e) {
+            System.out.println("  ✗ Protected Variable: Not accessible");
+        }
         
-        // Private variable - NOT ACCESSIBLE
-        // System.out.println("✗ Private Variable: " + obj.privVar);  // COMPILATION ERROR
-        System.out.println("✗ Private Variable: [NOT ACCESSIBLE - private to class A]");
-        
-        // Show that we can only access public method
-        System.out.println("\nCalling public method of A:");
-        obj.displayAll();
+        try {
+            // This will cause compilation error - cannot access private variable
+            // System.out.println("  Private Variable (privVar): " + objA.privVar);
+            System.out.println("  ✗ Private Variable (privVar): NOT ACCESSIBLE");
+            System.out.println("    → Private members are never accessible outside the class");
+            System.out.println("    → But we can use public getter: " + objA.getPrivVar());
+        } catch (Exception e) {
+            System.out.println("  ✗ Private Variable: Not accessible");
+        }
     }
 }

@@ -3,37 +3,48 @@ package bpack;
 import apack.A;
 
 /**
- * Class B that extends A from apack package
- * Demonstrates access specifiers through inheritance
- * Part of bpack package
+ * Class B extends A and demonstrates accessing inherited members
+ * from a different package
  */
 public class B extends A {
     
     /**
-     * Constructor that calls parent class constructor
-     * @param pub - Value for public variable
-     * @param prot - Value for protected variable
-     * @param priv - Value for private variable
+     * Constructor to initialize parent class
      */
-    public B(int pub, int prot, int priv) {
-        super(pub, prot, priv);  // Call parent class constructor
+    public B(int pubVar, int protVar, int privVar) {
+        super(pubVar, protVar, privVar);
     }
     
     /**
-     * Display method that tries to access variables of A using inheritance
+     * Display method to show which variables can be accessed
+     * through inheritance
      */
     public void display() {
-        System.out.println("\n--- Class B (extends A) from bpack ---");
-        System.out.println("Accessing inherited variables:\n");
+        System.out.println("\n========== CLASS B (extends A) ==========");
+        System.out.println("Accessing inherited members from Class A:");
         
-        // Public variable - ACCESSIBLE
-        System.out.println("✓ Public Variable: " + pubVar);
+        try {
+            System.out.println("  ✓ Public Variable (pubVar): " + pubVar);
+            System.out.println("    → Accessible because it's public");
+        } catch (Exception e) {
+            System.out.println("  ✗ Public Variable: Not accessible");
+        }
         
-        // Protected variable - ACCESSIBLE (because B extends A)
-        System.out.println("✓ Protected Variable: " + protVar);
+        try {
+            System.out.println("  ✓ Protected Variable (protVar): " + protVar);
+            System.out.println("    → Accessible through inheritance");
+        } catch (Exception e) {
+            System.out.println("  ✗ Protected Variable: Not accessible");
+        }
         
-        // Private variable - NOT ACCESSIBLE (will cause compilation error if uncommented)
-        // System.out.println("✗ Private Variable: " + privVar);  // COMPILATION ERROR
-        System.out.println("✗ Private Variable: [NOT ACCESSIBLE - private to class A]");
+        try {
+            // This will cause compilation error - cannot access private variable
+            // System.out.println("  Private Variable (privVar): " + privVar);
+            System.out.println("  ✗ Private Variable (privVar): NOT ACCESSIBLE");
+            System.out.println("    → Private members are not inherited");
+            System.out.println("    → But we can use getter: " + getPrivVar());
+        } catch (Exception e) {
+            System.out.println("  ✗ Private Variable: Not accessible");
+        }
     }
 }

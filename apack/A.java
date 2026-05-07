@@ -1,33 +1,42 @@
 package apack;
 
 /**
- * Class A demonstrating different access specifiers
- * Part of apack package
+ * Class A demonstrating access specifiers
+ * Contains variables with different access levels
  */
 public class A {
-    public int pubVar;           // Public variable - accessible everywhere
-    protected int protVar;       // Protected variable - accessible in subclasses and same package
-    private int privVar;         // Private variable - accessible only within this class
+    // Public variable - accessible from anywhere
+    public int pubVar;
+    
+    // Protected variable - accessible from subclasses and same package
+    protected int protVar;
+    
+    // Private variable - accessible only within this class
+    private int privVar;
     
     /**
-     * Constructor to initialize all three variables
-     * @param pub - Value for public variable
-     * @param prot - Value for protected variable
-     * @param priv - Value for private variable
+     * Constructor to initialize all variables
      */
-    public A(int pub, int prot, int priv) {
-        this.pubVar = pub;
-        this.protVar = prot;
-        this.privVar = priv;
+    public A(int pubVar, int protVar, int privVar) {
+        this.pubVar = pubVar;
+        this.protVar = protVar;
+        this.privVar = privVar;
     }
     
     /**
-     * Method to display all variables (demonstrates private access)
+     * Method to display all variables (accessible from anywhere)
      */
-    public void displayAll() {
-        System.out.println("    Inside Class A:");
-        System.out.println("    Public Variable: " + pubVar);
-        System.out.println("    Protected Variable: " + protVar);
-        System.out.println("    Private Variable: " + privVar);
+    public void displayAllVars() {
+        System.out.println("Inside Class A:");
+        System.out.println("  Public Variable: " + pubVar);
+        System.out.println("  Protected Variable: " + protVar);
+        System.out.println("  Private Variable: " + privVar);
+    }
+    
+    /**
+     * Getter method for private variable
+     */
+    public int getPrivVar() {
+        return privVar;
     }
 }
