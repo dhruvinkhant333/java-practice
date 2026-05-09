@@ -1,39 +1,34 @@
 /*
-Write a Java program that prompts the user to enter a single letter
-(character). Determine whether the entered character is a vowel (a, e,
-i, o, u, case-insensitive) or a consonant, and display the result.
+1.4
+
+Develop a Java application that calculates a person's Body Mass Index
+(BMI). The program should ask the user for their weight in pounds
+and height in inches. Convert these values to kilograms and meters
+respectively (1 pound = 0.45359237 kg, 1 inch = 0.0254 meters) and
+then calculate BMI (weight in kg / (height in meters)^2). Display the
+calculated BMI.
 */
 
 import java.util.Scanner;
 
-public class code_Practice { 
-
-    public static void main ( String [] args){
-
+public class code_Practice{
+    public static void main( String [] args){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println( "Enter one english character ");
-        char ch = scanner.next().charAt(0);
+        System.out.println("Enter your weight in pounds : ");
+        double mass = scanner.nextDouble();
 
-        if (isvowel(ch)){
-            System.out.println(ch + " is vowel ");
-        }else if( isConsonant(ch) ) {
-            System.out.println(ch + " is Consonant ");
-        }else{
-            System.out.println("invalide character !");
-        }
+        System.out.println("Enter your height in inches : ");
+        double height = scanner.nextDouble();
+
+        double kg = mass *  0.45359237 ;
+        double meter = height * 0.0254;
+        
+        double BMI = kg / (meter * meter ) ; 
+
+        System.out.printf("your BMI : %.4f%n " , BMI);
+
         scanner.close();
 
     }
-    private static boolean isvowel(char ch){
-        ch = Character.toLowerCase(ch);
-        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
-    }
-
-    private static boolean isConsonant(char ch){
-        ch = Character.toLowerCase(ch);
-        return ( ch >= 'a' && ch <= 'z') && !isvowel(ch);
-    }
-
-
 }
