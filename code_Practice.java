@@ -1,34 +1,36 @@
 /*
-1.4
-
-Develop a Java application that calculates a person's Body Mass Index
-(BMI). The program should ask the user for their weight in pounds
-and height in inches. Convert these values to kilograms and meters
-respectively (1 pound = 0.45359237 kg, 1 inch = 0.0254 meters) and
-then calculate BMI (weight in kg / (height in meters)^2). Display the
-calculated BMI.
+Simulate a simple ATM or cashier. Given an integer amount to be
+dispensed (e.g., 787), calculate and display the minimum number of
+currency notes of denominations 100, 50, 10, 5, 2, and 1 that would be
+given to the user.
 */
 
 import java.util.Scanner;
 
-public class code_Practice{
-    public static void main( String [] args){
+public class code_Practice {
+
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter your weight in pounds : ");
-        double mass = scanner.nextDouble();
+        System.out.print("Enter the amount to be dispensed: ");
+        int amount = scanner.nextInt();
 
-        System.out.println("Enter your height in inches : ");
-        double height = scanner.nextDouble();
+        int[] denominations = {100, 50, 10, 5, 2, 1};
+        int[] count = new int[denominations.length];
 
-        double kg = mass *  0.45359237 ;
-        double meter = height * 0.0254;
-        
-        double BMI = kg / (meter * meter ) ; 
+        for (int i = 0; i < denominations.length; i++) {
+            count[i] = amount / denominations[i];
+            amount %= denominations[i];
+        }
 
-        System.out.printf("your BMI : %.4f%n " , BMI);
+        System.out.println("Currency notes dispensed:");
+        for (int i = 0; i < denominations.length; i++) {
+            if (count[i] > 0) {
+                System.out.println(denominations[i] + " x " + count[i]);
+            }
+        }
 
         scanner.close();
-
     }
+    
 }
